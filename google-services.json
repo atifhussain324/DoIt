@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "119606597652",
+    "firebase_url": "https://todolist-ff521.firebaseio.com",
+    "project_id": "todolist-ff521",
+    "storage_bucket": "todolist-ff521.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119606597652:android:945608edcc75f4f8",
+        "android_client_info": {
+          "package_name": "com.example.atif.todolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119606597652-hphlv4ansmodnersnbuaemn6pcic4mes.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ZplfQEnroat1CpPpw_UTlH5NC72ddY8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
