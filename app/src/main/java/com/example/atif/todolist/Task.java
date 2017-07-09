@@ -6,10 +6,11 @@ import java.util.HashMap;
  * Created by Atif on 7/6/17.
  */
 
-public class ToDo {
+public class Task {
     private String title;
     private String description;
     private String dueDate;
+    private String dueTime;
     private String reminder;
     private String type;
     private String taskID;
@@ -38,6 +39,13 @@ public class ToDo {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
+    public String getDueTime() {
+        return dueTime;
+    }
+
+    public void setDueTime(String dueTime) {
+        this.dueTime = dueTime;
+    }
     public String getReminder() {
         return title;
     }
@@ -61,8 +69,8 @@ public class ToDo {
     }
 
 
-/*
-    public HashMap<String,String> toFirebaseObject() {
+
+  /*  public HashMap<String,String> toFirebaseObject() {
         HashMap<String,String> todo =  new HashMap<String,String>();
         todo.put("name", name);
         todo.put("message", message);

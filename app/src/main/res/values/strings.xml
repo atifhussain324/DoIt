@@ -5,5 +5,10 @@
     <string name="positive">Create</string>
     <string name="action_refresh">Refresh</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
-
+    <string-array name="task_options">
+        <item>Personal</item>
+        <item>School</item>
+        <item>Work</item>
+        <item>Shopping</item>
+    </string-array>
 </resources>
