@@ -2,8 +2,8 @@ package com.example.atif.todolist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,12 +16,13 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,14 +44,10 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
-                //createTask();
                 Intent myIntent = new Intent(MainActivity.this, NewTaskActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });
-
 
 
         mListView = (ListView) findViewById(R.id.tasklist);
@@ -58,15 +55,40 @@ public class MainActivity extends AppCompatActivity {
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                DatabaseReference itemRef = firebaseListAdapter.getRef(i);
-                itemRef.removeValue();
-                Log.v("position",String.valueOf(i));
+                final int position = i;
+                new MaterialDialog.Builder(MainActivity.this)
+                        .title(R.string.header)
+                        .content(R.string.content)
+                        .positiveText(R.string.agree)
+                        .negativeText(R.string.cancel)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                DatabaseReference itemRef = firebaseListAdapter.getRef(position);
+                                itemRef.removeValue();
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
                 return true;
             }
         });
+        mListView.isClickable();
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CheckBox cbox = (CheckBox)view.findViewById(R.id.completedBox);
+                    Log.v("box","checked");
 
-        firebaseListAdapter = new FirebaseListAdapter<Task>(this, Task.class, R.layout.task , myRef) {
+
+            }
+        });
+        firebaseListAdapter = new FirebaseListAdapter<Task>(this, Task.class, R.layout.task, myRef) {
             @Override
             protected void populateView(View v, Task task, int position) {
 
@@ -82,21 +104,20 @@ public class MainActivity extends AppCompatActivity {
                 time.setText(task.getDueTime());
 
 
-
-
-                if (task.getType().equals("Personal")){
-                    taskIcon.setImageResource(R.mipmap.brainstorm);
+                switch (task.getType()) {
+                    case "Personal":
+                        taskIcon.setImageResource(R.mipmap.brainstorm);
+                        break;
+                    case "Shopping":
+                        taskIcon.setImageResource(R.mipmap.groceries);
+                        break;
+                    case "Work":
+                        taskIcon.setImageResource(R.mipmap.job);
+                        break;
+                    case "School":
+                        taskIcon.setImageResource(R.mipmap.school);
+                        break;
                 }
-                else if (task.getType().equals("Shopping")){
-                    taskIcon.setImageResource(R.mipmap.groceries);
-                }
-                else if (task.getType().equals("Work")){
-                    taskIcon.setImageResource(R.mipmap.job);
-                }
-                else if (task.getType().equals("School")){
-                    taskIcon.setImageResource(R.mipmap.school);
-                }
-
 
 
             }
@@ -120,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
+                Intent myIntent = new Intent(MainActivity.this, CompletedTaskActivity.class);
+                MainActivity.this.startActivity(myIntent);
                 return true;
 
             case R.id.action_refresh:
@@ -134,10 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
-
-    }
-
-    public void createTask() {
 
     }
 
