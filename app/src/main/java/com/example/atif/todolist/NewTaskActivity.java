@@ -2,6 +2,7 @@ package com.example.atif.todolist;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -33,11 +35,13 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     EditText editDueTime;
     EditText editTitle;
     EditText editDescription;
+    CheckBox notificationBox;
     String type;
     String title;
     String description;
     String dueDate;
     String dueTime;
+    String checkbox;
 
     private DatabaseReference mDatabase;
 
@@ -60,12 +64,17 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 title = editTitle.getText().toString();
                 description = editDescription.getText().toString();
                 dueDate = editDueDate.getText().toString();
                 dueTime = editDueTime.getText().toString();
                 Log.v("Task",title + description + dueDate + dueTime);
+
                 saveTask();
+               /* DatabaseWriter writer= new DatabaseWriter();
+                writer.saveTask(mDatabase,title,description,dueDate,dueTime,type,checkbox);*/
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -119,6 +128,19 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
+        notificationBox = (CheckBox) findViewById(R.id.checkbox);
+        checkbox = "false";
+        notificationBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (notificationBox.isChecked()){
+                    checkbox = "true";
+                }
+                else {
+                    checkbox = "false";
+                }
+            }
+        });
 
     }
 
@@ -153,6 +175,7 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
         newTask.setDueDate(dueDate);
         newTask.setDueTime(dueTime);
         newTask.setType(type);
+        newTask.setReminder(checkbox);
 
         String key = mDatabase.push().getKey();
         Map<String, Object> childUpdates = new HashMap<>();

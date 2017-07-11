@@ -5,6 +5,10 @@
     <string name="positive">Create</string>
     <string name="action_refresh">Refresh</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
+    <string name="due_date">Due Date</string>
+    <string name="enable_reminder">Enable Reminder</string>
+    <string name="enter_a_task">Enter a task...</string>
+    <string name="time">Time</string>
     <string-array name="task_options">
         <item>Personal</item>
         <item>School</item>

@@ -9,7 +9,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_refresh"
-        android:icon="@drawable/repeat"
+        android:icon="@mipmap/repeat"
         android:title="@string/action_refresh"
         app:showAsAction="ifRoom"/>
 </menu>

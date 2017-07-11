@@ -13,7 +13,6 @@ public class Task {
     private String dueTime;
     private String reminder;
     private String type;
-    private String taskID;
 
 
 
@@ -47,7 +46,7 @@ public class Task {
         this.dueTime = dueTime;
     }
     public String getReminder() {
-        return title;
+        return reminder;
     }
 
     public void setReminder(String reminder) {
@@ -59,13 +58,6 @@ public class Task {
 
     public void setType(String type) {
         this.type = type;
-    }
-    public String getTaskID() {
-        return taskID;
-    }
-
-    public void setTaskID(String taskID) {
-        this.taskID = taskID;
     }
 
 

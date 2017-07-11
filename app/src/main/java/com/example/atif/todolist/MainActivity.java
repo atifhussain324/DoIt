@@ -1,30 +1,34 @@
 package com.example.atif.todolist;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
-import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReferenceFromUrl("https://todolist-ff521.firebaseio.com/Tasks");
+    ListView mListView;
+    FirebaseListAdapter<Task> firebaseListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(R.drawable.list);
+        toolbar.setLogo(R.mipmap.checklist);
         toolbar.setTitle("Do it!");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -46,6 +50,58 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
+
+
+
+        mListView = (ListView) findViewById(R.id.tasklist);
+        mListView.isLongClickable();
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                DatabaseReference itemRef = firebaseListAdapter.getRef(i);
+                itemRef.removeValue();
+                Log.v("position",String.valueOf(i));
+                return true;
+            }
+        });
+
+        firebaseListAdapter = new FirebaseListAdapter<Task>(this, Task.class, R.layout.task , myRef) {
+            @Override
+            protected void populateView(View v, Task task, int position) {
+
+                TextView title = (TextView) v.findViewById(R.id.title);
+                TextView description = (TextView) v.findViewById(R.id.description);
+                TextView date = (TextView) v.findViewById(R.id.date);
+                TextView time = (TextView) v.findViewById(R.id.time);
+                ImageView taskIcon = (ImageView) v.findViewById(R.id.taskIcon);
+
+                title.setText(task.getTitle());
+                description.setText(task.getDescription());
+                date.setText(task.getDueDate());
+                time.setText(task.getDueTime());
+
+
+
+
+                if (task.getType().equals("Personal")){
+                    taskIcon.setImageResource(R.mipmap.brainstorm);
+                }
+                else if (task.getType().equals("Shopping")){
+                    taskIcon.setImageResource(R.mipmap.groceries);
+                }
+                else if (task.getType().equals("Work")){
+                    taskIcon.setImageResource(R.mipmap.job);
+                }
+                else if (task.getType().equals("School")){
+                    taskIcon.setImageResource(R.mipmap.school);
+                }
+
+
+
+            }
+        };
+        mListView.setAdapter(firebaseListAdapter);
 
 
     }
@@ -82,23 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createTask() {
-        //Creating a new task. Writing to Database
 
-        boolean wrapInScrollView = true;
-        new MaterialDialog.Builder(this)
-                .title(R.string.title)
-                .customView(R.layout.new_task, wrapInScrollView)
-                .positiveText(R.string.positive)
-                .show();
-
-
-
-       /* mDatabase = FirebaseDatabase.getInstance().getReference("Tasks");
-        String key = mDatabase.push().getKey();
-        mDatabase.child(key).child("Title").setValue("Homework");
-        mDatabase.child(key).child("Description").setValue("Complete reading page 1-4");
-        mDatabase.child(key).child("DueDate").setValue("01/01/2001");
-        mDatabase.child(key).child("Type").setValue("School");*/
     }
 
 

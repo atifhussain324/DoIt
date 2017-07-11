@@ -1,41 +1,75 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip" >
+    android:layout_height="78dp"
+    android:longClickable="true"
+    android:padding="6dip">
 
     <ImageView
-        android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:id="@+id/taskIcon"
+        android:layout_width="64px"
+        android:layout_height="64px"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
-        android:contentDescription="TODO"
-        android:src="@drawable/schooltask" />
+        android:contentDescription="TODO" />
 
     <TextView
-        android:id="@+id/secondLine"
+        android:id="@+id/title"
         android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toEndOf="@+id/taskIcon"
+        android:layout_toLeftOf="@+id/completedBox"
+        android:layout_toRightOf="@+id/taskIcon"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical"
+        android:text="Example application"
+        android:textAlignment="viewStart"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <CheckBox
+        android:id="@+id/completedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/description" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/icon"
+        android:layout_below="@+id/description"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toRightOf="@+id/date"
+        android:text="Time"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="26dip"
+        android:layout_below="@+id/description"
+        android:layout_toEndOf="@+id/taskIcon"
+        android:layout_toRightOf="@+id/taskIcon"
+        android:text="Date"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="24dip"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/taskIcon"
+        android:layout_toRightOf="@+id/taskIcon"
         android:ellipsize="marquee"
         android:maxLines="1"
         android:text="Description"
         android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/firstLine"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/secondLine"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/icon"
-        android:gravity="center_vertical"
-        android:text="Example application"
-        android:textSize="16sp" />
 
 </RelativeLayout>
