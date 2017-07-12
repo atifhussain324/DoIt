@@ -3,13 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.atif.todolist.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_completed"
         android:orderInCategory="100"
         android:title="@string/completed"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_refresh"
-        android:icon="@mipmap/repeat"
-        android:title="@string/action_refresh"
-        app:showAsAction="ifRoom"/>
 </menu>

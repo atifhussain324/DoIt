@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="78dp"
-    android:longClickable="true"
     android:padding="6dip"
-    android:clickable="true">
+
+    >
 
     <ImageView
         android:id="@+id/taskIcon"
@@ -12,7 +12,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
-        android:contentDescription="TODO" />
+        android:contentDescription="TODO"
+
+        />
 
     <TextView
         android:id="@+id/title"
@@ -23,7 +25,7 @@
         android:layout_toEndOf="@+id/taskIcon"
         android:layout_toLeftOf="@+id/completedBox"
         android:layout_toRightOf="@+id/taskIcon"
-        android:fontFamily="sans-serif"
+        android:fontFamily="casual"
         android:gravity="center_vertical"
         android:text="Example application"
         android:textAlignment="viewStart"
@@ -38,7 +40,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/description"
-/>
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+
+
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/time"
@@ -50,7 +56,9 @@
         android:layout_marginStart="12dp"
         android:layout_toRightOf="@+id/date"
         android:text="Time"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+
+        />
 
     <TextView
         android:id="@+id/date"
@@ -60,7 +68,9 @@
         android:layout_toEndOf="@+id/taskIcon"
         android:layout_toRightOf="@+id/taskIcon"
         android:text="Date"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+
+        />
 
     <TextView
         android:id="@+id/description"
@@ -70,8 +80,9 @@
         android:layout_toEndOf="@+id/taskIcon"
         android:layout_toRightOf="@+id/taskIcon"
         android:ellipsize="marquee"
+
         android:maxLines="1"
         android:text="Description"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
 </RelativeLayout>

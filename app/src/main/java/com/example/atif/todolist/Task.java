@@ -1,7 +1,5 @@
 package com.example.atif.todolist;
 
-import java.util.HashMap;
-
 /**
  * Created by Atif on 7/6/17.
  */
@@ -13,8 +11,6 @@ public class Task {
     private String dueTime;
     private String reminder;
     private String type;
-
-
 
     public String getTitle() {
         return title;
@@ -31,6 +27,7 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getDueDate() {
         return dueDate;
     }
@@ -38,6 +35,7 @@ public class Task {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
+
     public String getDueTime() {
         return dueTime;
     }
@@ -45,13 +43,12 @@ public class Task {
     public void setDueTime(String dueTime) {
         this.dueTime = dueTime;
     }
-    public String getReminder() {
-        return reminder;
-    }
+
 
     public void setReminder(String reminder) {
         this.reminder = reminder;
     }
+
     public String getType() {
         return type;
     }
@@ -60,15 +57,5 @@ public class Task {
         this.type = type;
     }
 
-
-
-  /*  public HashMap<String,String> toFirebaseObject() {
-        HashMap<String,String> todo =  new HashMap<String,String>();
-        todo.put("name", name);
-        todo.put("message", message);
-        todo.put("date", date);
-
-        return todo;
-    }*/
 
 }
