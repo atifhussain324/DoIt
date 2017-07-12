@@ -187,7 +187,6 @@ public class NewTaskActivity extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         type = parent.getSelectedItem().toString();
-        Log.v("Type", type);
 
     }
 
