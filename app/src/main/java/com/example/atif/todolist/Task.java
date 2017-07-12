@@ -43,7 +43,9 @@ public class Task {
     public void setDueTime(String dueTime) {
         this.dueTime = dueTime;
     }
-
+    public String getReminder() {
+        return reminder;
+    }
 
     public void setReminder(String reminder) {
         this.reminder = reminder;
